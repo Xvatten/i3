@@ -1,0 +1,69 @@
+# I3CONKY
+# AUTHOR: Daniel Gullbransen daniel@llama.nu
+
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+
+# Update interval in seconds
+update_interval 2.0
+ 
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+#total_run_times 0
+ 
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+ 
+# How strict should if_up be when testing an interface for being up?
+# The value is one of up, link or address, to check for the interface
+# being solely up, being up and having link or being up, having link
+# and an assigned IP address. 
+if_up_strictness route
+ 
+# Add spaces to keep things from moving about?  This only affects certain objects.
+# use_spacer should have an argument of left, right, or none
+use_spacer left
+ 
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+ 
+# Number of cpu samples to average
+# Set to 1 to disable averaging
+cpu_avg_samples 2
+
+# mpd
+mpd_host localhost
+mpd_port 6600
+
+# Type your disk mountpoint in SSD and HDD setup below, e.g SDD could be Rootfs "/" and 
+# HDD can be your secondary disk mounted at "/hdd". 
+
+TEXT
+
+ [{ "full_text" : " Now Playing: $mpd_artist - $mpd_title " , "color" : "\#ffffff" },
+
+  { "full_text" : " CPU: ${cpu}% " , "color" :
+    ${if_match ${cpu}<90}"\#ffffff"${else}"\#ff0000"${endif} },
+
+  { "full_text" : " RAM: ${memperc}% " , "color" :
+    ${if_match ${memperc}<90}"\#ffffff"${else}"\#ff0000"${endif} },
+
+  { "full_text" : " SSD: ${fs_used /}B " , "color" :
+    ${if_match ${fs_used_perc /}<90}"\#ffffff"${else}"\#ff0000"${endif} },
+
+  { "full_text" : " HDD: ${fs_used /hdd}B " , "color" :
+    ${if_match ${fs_used_perc /hdd}<90}"\#ffffff"${else}"\#ff0000"${endif} },
+
+ # { "full_text" : " Storage:${fs_used /storage}B " , "color" :
+ #   ${if_match ${fs_used_perc /storage}<90}"\#ffffff"${else}"\#ff0000"${endif} },
+
+  { "full_text" : " Down:${downspeed eno1} Up:${upspeed eno1} " , "color" : "\#ffffff" },
+
+  { "full_text" : " ${addr eno1} " , "color" : "\#ffffff" },
+
+  { "full_text" : " $nodename Linux $kernel " , "color" : "\#ffffff" },
+
+  { "full_text" : " $time " , "color" : "\#ffffff" } ],
