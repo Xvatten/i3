@@ -45,20 +45,21 @@ TEXT
 
  [{ "full_text" : " Now Playing: $mpd_artist - $mpd_title " , "color" : "\#ffffff" },
 
-  { "full_text" : " CPU: ${cpu}% " , "color" :
+  { "full_text" : " CPU:${cpu}% " , "color" :
     ${if_match ${cpu}<90}"\#ffffff"${else}"\#ff0000"${endif} },
 
-  { "full_text" : " RAM: ${memperc}% " , "color" :
+  { "full_text" : " RAM:${memperc}% " , "color" :
     ${if_match ${memperc}<90}"\#ffffff"${else}"\#ff0000"${endif} },
 
-  { "full_text" : " SSD: ${fs_used /}B " , "color" :
+#  { "full_text" : " Nvidia: ${nvidia temp}C " , "color" : "\#ffffff" },
+#  { "full_text" : " GPU: ${nvidia gpufreq} MHz " , "color" : "\#ffffff" },
+#  { "full_text" : " MEM: ${nvidia memfreq} MHz " , "color" : "\#ffffff" },
+
+  { "full_text" : " SSD:${fs_used /} " , "color" :
     ${if_match ${fs_used_perc /}<90}"\#ffffff"${else}"\#ff0000"${endif} },
 
-  { "full_text" : " HDD: ${fs_used /hdd}B " , "color" :
+  { "full_text" : " HDD:${fs_used /hdd} " , "color" :
     ${if_match ${fs_used_perc /hdd}<90}"\#ffffff"${else}"\#ff0000"${endif} },
-
- # { "full_text" : " Storage:${fs_used /storage}B " , "color" :
- #   ${if_match ${fs_used_perc /storage}<90}"\#ffffff"${else}"\#ff0000"${endif} },
 
   { "full_text" : " Down:${downspeed eno1} Up:${upspeed eno1} " , "color" : "\#ffffff" },
 

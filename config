@@ -90,28 +90,28 @@ bindsym $mod+space focus mode_toggle
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace "1: Main"
-bindsym $mod+2 workspace "2: Steam"
-bindsym $mod+3 workspace "3: Web"
-bindsym $mod+4 workspace "4: Mail"
-bindsym $mod+5 workspace "5: Obs"
-bindsym $mod+6 workspace "6: Chat"
-bindsym $mod+7 workspace "7: Term"
-bindsym $mod+8 workspace "8: Gimp"
-bindsym $mod+9 workspace "9: Popcorn Time"
-bindsym $mod+0 workspace "10: Media"
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace "1: Main"
-bindsym $mod+Shift+2 move container to workspace "2: Steam"
-bindsym $mod+Shift+3 move container to workspace "3: Web"
-bindsym $mod+Shift+4 move container to workspace "4: Mail"
-bindsym $mod+Shift+5 move container to workspace "5: Obs"
-bindsym $mod+Shift+6 move container to workspace "6: Chat"
-bindsym $mod+Shift+7 move container to workspace "7: Term"
-bindsym $mod+Shift+8 move container to workspace "8: Gimp"
-bindsym $mod+Shift+9 move container to workspace "9: Popcorn Time"
-bindsym $mod+Shift+0 move container to workspace "10: Media"
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -152,23 +152,22 @@ set $screen2 DVI-D-0
 set $screen3 HDMI-0
 
 # Workspace Output
-workspace "1: Main" output $screen1
-workspace "2: Steam" output $screen1
-workspace "3: Web" output $screen1
-workspace "4: Mail" output $screen1
-workspace "5: Obs" output $screen1
-workspace "6: Chat" output $screen2
-workspace "7: Term" output $screen2
-workspace "8: Gimp" output $screen2
-workspace "9: Popcorn Time" output $screen3
-workspace "10: Media" output $screen3
+workspace 1 output $screen1
+workspace 2 output $screen1
+workspace 3 output $screen1
+workspace 4 output $screen2
+workspace 5 output $screen2
+workspace 6 output $screen2
+workspace 7 output $screen3
+workspace 8 output $screen3
+workspace 9 output $screen3
+workspace 10 output $screen3
 
-set $DEFAULTWALLPAPER $HOME/Pictures/Wallpapers/Games/No\ Man\'s\ Sky/logo.png # MUST BE PNG FORMAT
+set $DEFAULTWALLPAPER $HOME/Pictures/Wallpapers/Great\ Wall/DSC02876.JPG # MUST BE PNG FORMAT (and cover the whole X screen)
 
 # Keybindings
 bindsym ctrl+Shift+Escape exec --no-startup-id xfce4-taskmanager
-#bindsym ctrl+Mod1+Delete exec --no-startup-id i3lock -t -n -i $DEFAULTWALLPAPER
-bindsym $mod+L exec --no-startup-id xflock4
+bindsym ctrl+Mod1+Delete exec --no-startup-id i3lock -t -n -i $DEFAULTWALLPAPER
 bindsym $mod+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+F2 exec --no-startup-id xfce4-appfinder --collapsed
 
@@ -179,17 +178,14 @@ bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 # Startup applications Required
 exec --no-startup-id setxkbmap se
-exec --no-startup-id xrandr --output screen1 --mode 1920x1080 --rate 144 --primary
-exec_always --no-startup-id xrandr --output screen2 --auto --right-of screen1
-exec_always --no-startup-id xrandr --output screen3 --auto --right-of screen2
+exec --no-startup-id xrandr --output $screen1 --mode 1920x1080 --rate 144 --primary
+exec_always --no-startup-id xrandr --output $screen2 --auto --right-of $screen1
+exec_always --no-startup-id xrandr --output $screen3 --auto --right-of $screen2
 exec --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id roccateventhandler # For roccat users
 exec_always --no-startup-id nitrogen --restore
-#exec --no-startup-id xscreensaver
 
 # Startup applications Optional
-#exec --no-startup-id obs
-#exec --no-startup-id popcorntime
 exec --no-startup-id nvdock
 exec --no-startup-id steam
 
@@ -202,7 +198,7 @@ bindsym XF86AudioNext exec --no-startup-id mpc next
 # Alsa controls
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && killall -SIGUSR1 i3status
-bindsym XF86AudioMute exec --no-startup-id amixer -q -D pulse set Master toggle && killall -SIGUSR1 i3status
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killall -SIGUSR1 i3status
 
 # Pulse Audio controls
 #bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status # decrease sound volume
@@ -220,23 +216,26 @@ for_window [class="Xfce4-mixer"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Steam" title="Screenshot Uploader"] floating enable
 for_window [class="Steam" title="Friends"] floating enable
+for_window [class="Steam" title="Steam Guard"] floating enable
+for_window [class="Steam" title="Steam - Update News"] floating enable
+for_window [class="Steam" title="* - Chat$"] floating enable
 
 # Placement | Assignments
-#assign [class="Steam"] "2: Steam"
-#assign [class="Wine"] "2: Steam"
-#assign [class="Firefox"] "3: Web"
-#assign [class="dwb"] "3: Web"
-#assign [class="Thunderbird"] "4: Mail"
-#assign [class="obs"] "5: Obs"
-#assign [class="Telegram"] "6: Chat"
-#assign [class="TeamSpeak 3"] "6: Chat"
-#assign [class="Skype"] "6: Chat"
-#assign [class="Xfce4-terminal"] "7: Term"
-#assign [class="Gimp"] "8: Gimp"
-#assign [class="Popcorntime"] "9: Popcorn Time"
-#assign [class="Xfmpc"]  "10: Media"
-#assign [class="mpv"] "10: Media"
-#assign [class="Vlc"] "10: Media"
+assign [class="Steam"] 5
+#assign [class="Wine"] 
+#assign [class="Firefox"] 
+#assign [class="dwb"]
+#assign [class="Thunderbird"] 
+#assign [class="obs"] 
+#assign [class="Telegram"] 
+#assign [class="TeamSpeak 3"] 
+#assign [class="Skype"] 
+#assign [class="Xfce4-terminal"] 
+#assign [class="Gimp"] 
+#assign [class="Popcorntime"] 
+#assign [class="Xfmpc"] 
+#assign [class="mpv"] 
+#assign [class="Vlc"] 
 
 
 # Nvidia Green
@@ -249,14 +248,14 @@ for_window [class="Steam" title="Friends"] floating enable
 #set $color #DD4814
 
 # Fedora Blue
-set $color #3B6EB4
+#set $color #3B6EB4
 
 # Daniel Purple
 #set $color #6900EE
 #set $color #4500A9
 
 # Cool Blue
-#set $color #4564FF
+set $color #4564FF
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
