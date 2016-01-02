@@ -24,7 +24,7 @@ font pango:Droid Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id xfce4-terminal
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -33,11 +33,11 @@ bindsym $mod+Shift+Q kill
 hide_edge_borders both
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#191919' -nf '#a5a5a5' -sb '#3B6EB4' -sf '#ffffff'"
+bindsym $mod+d exec --no-startup-id "dmenu_run -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#191919' -nf '#a5a5a5' -sb '#3B6EB4' -sf '#ffffff'"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#191919' -nf '#a5a5a5' -sb '#3B6EB4' -sf '#ffffff'"
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#191919' -nf '#a5a5a5' -sb '#3B6EB4' -sf '#ffffff'"
 
 # change focus
 #bindsym $mod+j focus left
@@ -89,29 +89,41 @@ bindsym $mod+space focus mode_toggle
 # focus the child container
 #bindsym $mod+d focus child
 
+# set workspaces
+set $WS1 "1"
+set $WS2 "2"
+set $WS3 "3"
+set $WS4 "4"
+set $WS5 "5"
+set $WS6 "6"
+set $WS7 "7"
+set $WS8 "8"
+set $WS9 "9"
+set $WS10 "10"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -152,29 +164,31 @@ set $screen2 DVI-D-0
 set $screen3 HDMI-0
 
 # Workspace Output
-workspace 1 output $screen1
-workspace 2 output $screen1
-workspace 3 output $screen1
-workspace 4 output $screen2
-workspace 5 output $screen2
-workspace 6 output $screen2
-workspace 7 output $screen3
-workspace 8 output $screen3
-workspace 9 output $screen3
-workspace 10 output $screen3
+workspace $WS1 output $screen1
+workspace $WS2 output $screen1
+workspace $WS3 output $screen1
+workspace $WS4 output $screen2
+workspace $WS5 output $screen2
+workspace $WS6 output $screen2
+workspace $WS7 output $screen3
+workspace $WS8 output $screen3
+workspace $WS9 output $screen3
+workspace $WS10 output $screen3
 
 set $DEFAULTWALLPAPER $HOME/Pictures/Wallpapers/Great\ Wall/DSC02876.JPG # MUST BE PNG FORMAT (and cover the whole X screen)
 
 # Keybindings
-bindsym ctrl+Shift+Escape exec --no-startup-id xfce4-taskmanager
+bindsym ctrl+Shift+Escape exec --no-startup-id "urxvt -e top"
 bindsym ctrl+Mod1+Delete exec --no-startup-id i3lock -t -n -i $DEFAULTWALLPAPER
-bindsym $mod+F3 exec --no-startup-id xfce4-appfinder
-bindsym $mod+F2 exec --no-startup-id xfce4-appfinder --collapsed
+bindsym $mod+m exec --no-startup-id "urxvt -e ncmpc"
+bindsym $mod+t exec --no-startup-id "urxvt -e rtorrent"
+bindsym $mod+a exec --no-startup-id "urxvt -e alsamixer"
+bindsym $mod+g exec --no-startup-id "urxvt -e vim"
 
 # scrot & gimp - root
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 # scrot & gimp - select window or rectangle
-bindsym Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym --release Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 # Startup applications Required
 exec --no-startup-id setxkbmap se
@@ -187,7 +201,7 @@ exec_always --no-startup-id nitrogen --restore
 
 # Startup applications Optional
 exec --no-startup-id nvdock
-exec --no-startup-id steam
+exec --no-startup-id steam -silent
 
 # MPD controls
 bindsym XF86AudioStop exec --no-startup-id mpc stop
@@ -207,8 +221,8 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killal
 
 # Applications controls
 bindsym XF86Calculator exec --no-startup-id galculator
-bindsym XF86Explorer exec --no-startup-id thunar
-bindsym XF86HomePage exec --no-startup-id firefox
+bindsym XF86Explorer exec --no-startup-id "urxvt -e ncdu"
+bindsym XF86HomePage exec --no-startup-id dwb
 
 for_window [class="Nvidia-settings"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
