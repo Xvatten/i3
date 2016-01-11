@@ -228,11 +228,11 @@ for_window [class="Nvidia-settings"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Xfce4-mixer"] floating enable
 for_window [class="Galculator"] floating enable
-for_window [class="Steam" title="Screenshot Uploader"] floating enable
-for_window [class="Steam" title="Friends"] floating enable
-for_window [class="Steam" title="Steam Guard"] floating enable
-for_window [class="Steam" title="Steam - Update News"] floating enable
-for_window [class="Steam" title="* - Chat$"] floating enable
+#for_window [class="Steam" title="Screenshot Uploader"] floating enable
+#for_window [class="Steam" title="Friends"] floating enable
+#for_window [class="Steam" title="Steam Guard"] floating enable
+#for_window [class="Steam" title="Steam - Update News"] floating enable
+#for_window [class="Steam" title="* - Chat$"] floating enable
 
 # Placement | Assignments
 assign [class="Steam"] 5
