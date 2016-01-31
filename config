@@ -180,10 +180,10 @@ set $DEFAULTWALLPAPER $HOME/Pictures/Wallpapers/Great\ Wall/DSC02876.JPG # MUST 
 # Keybindings
 bindsym ctrl+Shift+Escape exec --no-startup-id "urxvt -e top"
 bindsym ctrl+Mod1+Delete exec --no-startup-id i3lock -t -n -i $DEFAULTWALLPAPER
-bindsym $mod+m exec --no-startup-id "urxvt -e ncmpc"
-bindsym $mod+t exec --no-startup-id "urxvt -e rtorrent"
-bindsym $mod+a exec --no-startup-id "urxvt -e alsamixer"
-bindsym $mod+g exec --no-startup-id "urxvt -e vim"
+#bindsym $mod+m exec --no-startup-id "urxvt -e ncmpc"
+#bindsym $mod+t exec --no-startup-id "urxvt -e rtorrent"
+#bindsym $mod+a exec --no-startup-id "urxvt -e alsamixer"
+#bindsym $mod+g exec --no-startup-id "urxvt -e vim"
 
 # scrot & gimp - root
 bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
@@ -200,7 +200,7 @@ exec --no-startup-id roccateventhandler # For roccat users
 exec_always --no-startup-id nitrogen --restore
 
 # Startup applications Optional
-exec --no-startup-id nvdock
+#exec --no-startup-id nvdock
 exec --no-startup-id steam -silent
 
 # MPD controls
@@ -210,28 +210,28 @@ bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioNext exec --no-startup-id mpc next
 
 # Alsa controls
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && killall -SIGUSR1 i3status
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killall -SIGUSR1 i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && killall -SIGUSR1 i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && killall -SIGUSR1 i3status
+#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killall -SIGUSR1 i3status
 
 # Pulse Audio controls
-#bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status # decrease sound volume
-#bindsym XF86AudioRaiseVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status # increase sound volume
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status # mute sound
+bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status # decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status # increase sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status # mute sound
 
 # Applications controls
 bindsym XF86Calculator exec --no-startup-id galculator
 bindsym XF86Explorer exec --no-startup-id "urxvt -e ncdu"
-bindsym XF86HomePage exec --no-startup-id dwb
+bindsym XF86HomePage exec --no-startup-id google-chrome-stable
 
 for_window [class="Nvidia-settings"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Xfce4-mixer"] floating enable
 for_window [class="Galculator"] floating enable
-#for_window [class="Steam" title="Screenshot Uploader"] floating enable
-#for_window [class="Steam" title="Friends"] floating enable
-#for_window [class="Steam" title="Steam Guard"] floating enable
-#for_window [class="Steam" title="Steam - Update News"] floating enable
+for_window [class="Steam" title="Screenshot Uploader"] floating enable
+for_window [class="Steam" title="Friends"] floating enable
+for_window [class="Steam" title="Steam Guard"] floating enable
+for_window [class="Steam" title="Steam - Update News"] floating enable
 #for_window [class="Steam" title="* - Chat$"] floating enable
 
 # Placement | Assignments
