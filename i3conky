@@ -43,9 +43,12 @@ mpd_port 6600
 
 TEXT
 
- [{ "full_text" : " Now Playing: $mpd_artist - $mpd_title " , "color" : "\#ffffff" },
+# [{ "full_text" : " Now Playing: $mpd_artist - $mpd_title " , "color" : "\#ffffff" },
 
-  { "full_text" : " CPU:${cpu}% " , "color" :
+#  { "full_text" : " Vol:${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} " , "color" : "\#ffffff" },
+#  { "full_text" : " Vol:${exec pactl list sinks | grep "Volume: 0" | cut -d " " -f4 } " , "color" : "\#ffffff" },
+
+  [{ "full_text" : " CPU:${cpu}% " , "color" :
     ${if_match ${cpu}<90}"\#ffffff"${else}"\#ff0000"${endif} },
 
   { "full_text" : " RAM:${memperc}% " , "color" :
@@ -68,3 +71,5 @@ TEXT
   { "full_text" : " $nodename Linux $kernel " , "color" : "\#ffffff" },
 
   { "full_text" : " $time " , "color" : "\#ffffff" } ],
+
+

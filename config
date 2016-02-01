@@ -18,7 +18,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Droid Sans Mono 10
+font pango:Ubuntu Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -30,7 +30,7 @@ bindsym $mod+Return exec --no-startup-id urxvt
 bindsym $mod+Shift+Q kill
 
 # window decoration style 
-hide_edge_borders both
+hide_edge_borders none
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id "dmenu_run -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#191919' -nf '#a5a5a5' -sb '#3B6EB4' -sf '#ffffff'"
@@ -162,6 +162,7 @@ bindsym $mod+r mode "resize"
 set $screen1 DVI-I-1
 set $screen2 DVI-D-0
 set $screen3 HDMI-0
+set $screen4 DP-0
 
 # Workspace Output
 workspace $WS1 output $screen1
@@ -173,17 +174,17 @@ workspace $WS6 output $screen2
 workspace $WS7 output $screen3
 workspace $WS8 output $screen3
 workspace $WS9 output $screen3
-workspace $WS10 output $screen3
+workspace $WS10 output $screen4
 
-set $DEFAULTWALLPAPER $HOME/Pictures/Wallpapers/Great\ Wall/DSC02876.JPG # MUST BE PNG FORMAT (and cover the whole X screen)
+set $DEFAULTWALLPAPER $HOME/Pictures/Mountain.png # MUST BE PNG FORMAT (and cover the whole X screen)
 
 # Keybindings
 bindsym ctrl+Shift+Escape exec --no-startup-id "urxvt -e top"
 bindsym ctrl+Mod1+Delete exec --no-startup-id i3lock -t -n -i $DEFAULTWALLPAPER
-#bindsym $mod+m exec --no-startup-id "urxvt -e ncmpc"
-#bindsym $mod+t exec --no-startup-id "urxvt -e rtorrent"
-#bindsym $mod+a exec --no-startup-id "urxvt -e alsamixer"
-#bindsym $mod+g exec --no-startup-id "urxvt -e vim"
+bindsym $mod+m exec --no-startup-id "urxvt -e ncmpc"
+bindsym $mod+t exec --no-startup-id "urxvt -e rtorrent"
+bindsym $mod+a exec --no-startup-id "urxvt -e alsamixer"
+bindsym $mod+g exec --no-startup-id "urxvt -e vim"
 
 # scrot & gimp - root
 bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
@@ -191,16 +192,17 @@ bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 bindsym --release Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 # Startup applications Required
+exec_always --no-startup-id compton --opacity-rule '100:window_type = "dock" && class_g = "i3bar"' --config ~/.config/compton.conf -b
 exec --no-startup-id setxkbmap se
 exec --no-startup-id xrandr --output $screen1 --mode 1920x1080 --rate 144 --primary
 exec_always --no-startup-id xrandr --output $screen2 --auto --right-of $screen1
 exec_always --no-startup-id xrandr --output $screen3 --auto --right-of $screen2
-exec --no-startup-id nvidia-settings --load-config-only
+exec_always --no-startup-id nvidia-settings --load-config-only
 exec --no-startup-id roccateventhandler # For roccat users
 exec_always --no-startup-id nitrogen --restore
 
 # Startup applications Optional
-#exec --no-startup-id nvdock
+exec --no-startup-id nvdock
 exec --no-startup-id steam -silent
 
 # MPD controls
@@ -210,19 +212,19 @@ bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioNext exec --no-startup-id mpc next
 
 # Alsa controls
-#bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && killall -SIGUSR1 i3status
-#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killall -SIGUSR1 i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && killall -SIGUSR1 i3status
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && killall -SIGUSR1 i3status
 
 # Pulse Audio controls
-bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status # decrease sound volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status # increase sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status # mute sound
+#bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status # decrease sound volume
+#bindsym XF86AudioRaiseVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status # increase sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status # mute sound
 
 # Applications controls
 bindsym XF86Calculator exec --no-startup-id galculator
 bindsym XF86Explorer exec --no-startup-id "urxvt -e ncdu"
-bindsym XF86HomePage exec --no-startup-id google-chrome-stable
+bindsym XF86HomePage exec --no-startup-id vimb
 
 for_window [class="Nvidia-settings"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
@@ -300,7 +302,7 @@ colors {
 
 # colors
 # class                          border		backgrd		text
-client.focused			$color		$color		#111111
+client.focused			$color		$color		#ffffff
 client.focused_inactive 	#111111 	#111111 	#a5a5a5
 client.unfocused        	#111111 	#111111 	#a5a5a5
 client.urgent           	#a5a5a5 	#a5a5a5 	#2e3436
